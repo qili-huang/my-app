@@ -10,7 +10,7 @@ router.get("/hello", (ctx) => {
 
 //查询所有用户列表
 router.get('/users', (ctx) => {
-    ctx.body = UserService.getAllUsers;
+    ctx.body = UserService.getAllUsers();
 });
 
 //根据ID查询用户信息
@@ -27,14 +27,14 @@ router.get('/users/:id', (ctx) => {
 
 //创建一个新的用户
 router.post('/users', (ctx) => {
-    const newUser = UserService.createUser(ctx.request.req.body);
+    const newUser = UserService.createUser(ctx.request.body);
     ctx.status = 201;
     ctx.body = newUser;
 });
 
 //更新用户信息
 router.put('/users/:id', (ctx) => {
-    const updatedUser = UserService.updateUser(parseInt(ctx.params.id), ctx.request.req.body);
+    const updatedUser = UserService.updateUser(parseInt(ctx.params.id), ctx.request.body);
     if(!updatedUser){
         ctx.status = 404;
         ctx.body = { error: 'User not found' };
