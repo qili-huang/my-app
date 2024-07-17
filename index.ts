@@ -1,12 +1,10 @@
 import Koa from "koa";
-import {router} from "./routes";
-import bodyParser from '@koa/bodyparser';
+import {router} from "./routers";
 
 const app = new Koa();
 const port = 3000; 
 
 
-app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(port, () => {

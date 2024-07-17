@@ -2,12 +2,6 @@ class UserDTO {
     id: number;
     name: string;
     age: number;
-
-    constructor(id: number, name: string, age: number) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
 }
 
 const Users: UserDTO [] = [
@@ -39,9 +33,8 @@ export const getUserById = (id: number): UserDTO | undefined => {
 };
 
 //创建一个新的用户
-export const createUser = (user: UserDTO): UserDTO => {
-    user.id = Users.length ? Math.max(...Users.map(u => u.id!)) + 1 : 1;
-    Users.push(user);
+export const createUser = (user: Omit<UserDTO, 'id'>) => {
+    Users.push({ id: Users.length ? Math.max(...Users.map(u => u.id!)) + 1 : 1, ...user })
     return user;
 };
 
